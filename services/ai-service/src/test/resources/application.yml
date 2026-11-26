@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: ai-service-test
+  cloud:
+    config:
+      enabled: false
+  security:
+    user:
+      password: test-only-unused-password
+tasknest:
+  ai:
+    enabled: false
+    provider: groq
+    model: openai/gpt-oss-120b
+    fallback-api-key: ''
+    fallback-provider: openrouter
+    fallback-model: openrouter/free
+    user-daily-limit: 60
+    global-daily-limit: 300
+    requests-per-minute: 2
+    tokens-per-minute: 8000
+    tokens-per-day: 200000
+    max-completion-tokens: 1500

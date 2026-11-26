@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+  security:
+    user:
+      password: test-only-unused-password
+eureka:
+  client:
+    enabled: false

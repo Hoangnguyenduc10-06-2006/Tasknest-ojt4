@@ -1,0 +1,10 @@
+package vn.tasknest.identityservice;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@org.springframework.scheduling.annotation.EnableScheduling
+@SpringBootApplication
+
+public class IdentityServiceApplication {
+    public static void main(String[] args) { SpringApplication.run(IdentityServiceApplication.class, args); }
+}

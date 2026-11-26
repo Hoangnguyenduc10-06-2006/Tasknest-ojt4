@@ -1,0 +1,5 @@
+# MySQL access from the local IDE only; preserve the existing database volume.
+services:
+  mysql:
+    ports:
+      - '127.0.0.1:3307:3306'

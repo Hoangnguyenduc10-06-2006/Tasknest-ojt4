@@ -1,0 +1,32 @@
+.DS_Store
+.idea/
+.vscode/
+*.iml
+**/target/
+**/node_modules/
+**/dist/
+**/coverage/
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.log
+~$*
+.artifacts/
+output/
+outputs/
+.local/
+
+*.tsbuildinfo
+
+# Local documents, reports and render artifacts
+/local/
+BACKENDOUTLOOK*
+
+.env.auth-tmp
+
+# Generated Python bytecode
+__pycache__/
+*.py[cod]
+
+/local/work-files/

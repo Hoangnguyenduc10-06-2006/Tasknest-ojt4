@@ -1,0 +1,14 @@
+.git
+**/node_modules
+**/dist
+.env
+.env.*
+**/*.log
+.artifacts
+output
+outputs
+*.docx
+
+# Local documents, reports and render artifacts
+/local/
+/.local/

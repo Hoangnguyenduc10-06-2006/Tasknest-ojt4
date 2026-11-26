@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:tasknest_ai}?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true
+    username: ${DB_USERNAME:tasknest_ai}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 3
+      connection-timeout: 5000
+  flyway:
+    enabled: true
+    clean-disabled: true
+    validate-on-migrate: true
+tasknest:
+  ai:
+    enabled: ${AI_ENABLED:false}
+    api-key: ${AI_API_KEY:${GROQ_API_KEY:}}
+    provider: ${AI_PROVIDER:groq}
+    model: ${AI_MODEL:${GROQ_MODEL:openai/gpt-oss-120b}}
+    fallback-api-key: ${AI_FALLBACK_API_KEY:}
+    fallback-provider: ${AI_FALLBACK_PROVIDER:openrouter}
+    fallback-model: ${AI_FALLBACK_MODEL:openrouter/free}
+    user-daily-limit: ${AI_USER_DAILY_LIMIT:60}
+    global-daily-limit: ${AI_GLOBAL_DAILY_LIMIT:300}
+    requests-per-minute: ${AI_REQUESTS_PER_MINUTE:2}
+    tokens-per-minute: ${AI_TOKENS_PER_MINUTE:8000}
+    tokens-per-day: ${AI_TOKENS_PER_DAY:200000}
+    max-completion-tokens: ${AI_MAX_COMPLETION_TOKENS:1500}

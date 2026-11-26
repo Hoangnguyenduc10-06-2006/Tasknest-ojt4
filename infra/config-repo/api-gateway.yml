@@ -1,0 +1,52 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false
+          httpclient:
+            connect-timeout: 3000
+            response-timeout: 5s
+          routes:
+            - id: ai-api
+              uri: lb://ai-service
+              predicates:
+                - Path=/api/ai/**
+              metadata:
+                response-timeout: 45000
+            - id: identity-api
+              uri: lb://identity-service
+              predicates:
+                - Path=/api/identity/**,/api/v1/auth/**,/.well-known/**
+            - id: work-file-upload
+              uri: lb://work-service
+              predicates:
+                - Path=/api/work/projects/*/files
+                - Method=POST
+              metadata:
+                response-timeout: 120000
+            - id: work-chat-image-upload
+              uri: lb://work-service
+              predicates:
+                - Path=/api/work/community/chat/*/messages
+                - Method=POST
+              metadata:
+                response-timeout: 120000
+            - id: work-api
+              uri: lb://work-service
+              predicates:
+                - Path=/api/work/**
+            - id: notification-api
+              uri: lb://notification-service
+              predicates:
+                - Path=/api/notifications/**
+            - id: work-websocket
+              uri: lb:ws://work-service
+              predicates:
+                - Path=/ws/work
+            - id: notification-websocket
+              uri: lb:ws://notification-service
+              predicates:
+                - Path=/ws,/ws/**

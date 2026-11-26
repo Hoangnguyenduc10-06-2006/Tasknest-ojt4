@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: ai-service
+  config:
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8888}
+  cloud:
+    config:
+      username: ${CONFIG_USERNAME}
+      password: ${CONFIG_PASSWORD}
+      fail-fast: true
+  security:
+    user:
+      name: disabled-scaffold-user
+      password: ${SCAFFOLD_SECURITY_PASSWORD}
+server:
+  port: ${SERVER_PORT:8084}
+  tomcat:
+    max-http-form-post-size: 8KB
+management:
+  server:
+    port: ${MANAGEMENT_PORT:9084}
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include: readinessState,db

@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: discovery-server
+  config:
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8888}
+  cloud:
+    config:
+      username: ${CONFIG_USERNAME}
+      password: ${CONFIG_PASSWORD}
+      fail-fast: true
+  security:
+    user:
+      name: ${DISCOVERY_USERNAME}
+      password: ${DISCOVERY_PASSWORD}
+server:
+  port: ${SERVER_PORT:8761}
+management:
+  server:
+    port: ${MANAGEMENT_PORT:9761}
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true

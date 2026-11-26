@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: ${CONFIG_SEARCH_LOCATIONS:file:./infra/config-repo}
+        accept-empty: false
+  security:
+    user:
+      name: ${CONFIG_USERNAME}
+      password: ${CONFIG_PASSWORD}
+server:
+  port: ${SERVER_PORT:8888}
+management:
+  server:
+    port: ${MANAGEMENT_PORT:9888}
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+  health:
+    config:
+      enabled: false

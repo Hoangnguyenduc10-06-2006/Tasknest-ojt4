@@ -1,0 +1,43 @@
+# Applied after compose.yml. Images are built and tested on GitHub, never on the VPS.
+x-startup: &startup
+  interval: 15s
+  timeout: 10s
+  retries: 60
+  start_period: 90s
+services:
+  mysql:
+    # Local-only by default. Public access requires an explicit bind and source-IP firewall.
+    ports: ['${MYSQL_ACCESS_BIND:-127.0.0.1}:${MYSQL_ACCESS_PORT:-13307}:3306']
+    labels:
+      tasknest.mysql.allowed-ip: '${MYSQL_ACCESS_ALLOWED_IP:-}'
+  config-server:
+    image: ${IMAGE_PREFIX:?Missing image registry}/config-server:${RELEASE_SHA:?Missing release SHA}
+    healthcheck:
+      <<: *startup
+  discovery-server:
+    image: ${IMAGE_PREFIX:?Missing image registry}/discovery-server:${RELEASE_SHA:?Missing release SHA}
+    healthcheck:
+      <<: *startup
+  identity-service:
+    image: ${IMAGE_PREFIX:?Missing image registry}/identity-service:${RELEASE_SHA:?Missing release SHA}
+    healthcheck:
+      <<: *startup
+  work-service:
+    mem_limit: 1g
+    image: ${IMAGE_PREFIX:?Missing image registry}/work-service:${RELEASE_SHA:?Missing release SHA}
+    healthcheck:
+      <<: *startup
+  notification-service:
+    image: ${IMAGE_PREFIX:?Missing image registry}/notification-service:${RELEASE_SHA:?Missing release SHA}
+    healthcheck:
+      <<: *startup
+  ai-service:
+    image: ${IMAGE_PREFIX:?Missing image registry}/ai-service:${RELEASE_SHA:?Missing release SHA}
+    healthcheck:
+      <<: *startup
+  api-gateway:
+    image: ${IMAGE_PREFIX:?Missing image registry}/api-gateway:${RELEASE_SHA:?Missing release SHA}
+    healthcheck:
+      <<: *startup
+  frontend:
+    image: ${IMAGE_PREFIX:?Missing image registry}/frontend:${RELEASE_SHA:?Missing release SHA}

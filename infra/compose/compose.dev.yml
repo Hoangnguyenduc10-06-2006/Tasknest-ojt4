@@ -1,0 +1,12 @@
+# Optional host access for IDE/Vite development. Bind only to loopback.
+services:
+  api-gateway:
+    ports: ['127.0.0.1:8080:8080']
+  config-server:
+    ports: ['127.0.0.1:8888:8888']
+  discovery-server:
+    ports: ['127.0.0.1:8761:8761']
+  mysql:
+    ports: ['127.0.0.1:3306:3306']
+  rabbitmq:
+    ports: ['127.0.0.1:5672:5672', '127.0.0.1:15672:15672']
